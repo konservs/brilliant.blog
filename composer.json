@@ -1,0 +1,8 @@
+{
+	"autoload": {
+		"psr-0": {
+			"Brilliant": "framework/libraries",
+			"Application": "application/"
+		}
+	}
+}
