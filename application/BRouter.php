@@ -9,9 +9,9 @@
  * 
  * @copyright © Andrii Biriev, <a@konservs.com>
  */
-
-bimport('cms.router');
-bimport('log.general');
+namespace Application;
+use Brilliant\cms\BRouterBase;
+use Brilliant\log\BLog;
 
 class BRouter extends BRouterBase{
 	protected static $starttime=0;
