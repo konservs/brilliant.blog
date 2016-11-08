@@ -14,4 +14,4 @@ $loader=require(BROOTPATH.'vendor'.DIRECTORY_SEPARATOR.'autoload.php');
 //
 use Application\BRouter;
 $router=new Application\BRouter();
-$router->run();
+$router->run($_SERVER['REQUEST_URI'],$_SERVER['HTTP_HOST']);
