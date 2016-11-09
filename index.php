@@ -14,5 +14,5 @@ define('BTEMPLATESPATH', BROOTPATH.'templates'.DIRECTORY_SEPARATOR);
 $loader=require(BROOTPATH.'vendor'.DIRECTORY_SEPARATOR.'autoload.php');
 //
 use Application\BRouter;
-$router=new Application\BRouter();
+$router=Application\BRouter::getInstance();
 $router->run($_SERVER['REQUEST_URI'],$_SERVER['HTTP_HOST']);
