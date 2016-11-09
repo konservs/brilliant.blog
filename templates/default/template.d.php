@@ -1,8 +1,9 @@
 <?php
 defined('BEXEC')or die('No direct access!');
-//bimport('html.general');
-//bimport('http.request');
-//bimport('cms.breadcrumbs');
+use Brilliant\http\BRequest;
+use Brilliant\html\BHTML;
+use Application\BRouter;
+
 $printversion=BRequest::GetInt('printversion');
 $bhtml=BHTML::getInstance();
 $bhtml->add_meta('viewport','width=device-width, initial-scale=0.35, maximum-scale=1, user-scalable=yes');
