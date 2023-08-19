@@ -2,6 +2,8 @@
 defined('BEXEC')or die('No direct access!');
 use Brilliant\http\BRequest;
 use Brilliant\html\BHTML;
+use Brilliant\CMS\BLang;
+use Brilliant\CMS\BBreadcrumbsGeneral;
 use Application\BRouter;
 
 $printversion=BRequest::GetInt('printversion');
@@ -11,13 +13,12 @@ $brouter=BRouter::getInstance();
 if((defined('DEBUG_SITENOINDEX'))&&(DEBUG_SITENOINDEX)){
 	$bhtml->add_meta('robots','NOINDEX, NOFOLLOW');
 	}
-$bhtml->add_js('','
+$bhtml->addJS('','
 	window.roothostname="'.BHOSTNAME.'";
 	');
-$bhtml->use_framework('jquery');
-$bhtml->use_framework('brilliant');
-$bhtml->use_framework('bajaxslider');
-$bhtml->add_css('//'.BHOSTNAME_STATIC.'/css/main.css?v=1.0.5');
+$bhtml->useFramework('jquery');
+$bhtml->useFramework('brilliant');
+$bhtml->addCSS(URL_STATIC.'css/main.css?v=1.0.5');
 $bhtml->add_meta('','text/html; charset=utf-8','Content-Type');
 
 $canonical=array();
@@ -54,96 +55,25 @@ $currentdatestr.=$now->format('Y');//01
 		<?php endif; ?>
 	</head>
 <body lang="<?php echo(BLang::$langcode_web) ?>" itemscope itemtype="http://schema.org/WebPage">
-<div id="footer-pusher">
-	<div id="before-head">
-		<div class="wrapper">
-			<div class="lang">{{position:headlang}}</div>
-			{{position:headmenu}}
-			<div class="clear"></div>
-		</div>
-	</div>
+        <a name="top"></a>
+        <div class="bodycontainer">
+        <?php
+        $now = new DateTime();
+        $nowMonth = (int)$now->format('m');
+        $nowDay = (int)$now->format('d');
+        //From 15th december to 15th January
+        if((($nowMonth==12)&&($nowDay>15))||(($nowMonth==1)&&($nowDay<20))){
+	        $wheaderclasses.=' girlanda';
+        	}
+        ?>
+            <div class="wwrapper header<?php echo $wheaderclasses; ?>">
+                <a href="/" class="logo"></a>
+                {{position:menu}}
+            </div>
+        </div>
 
-	<?php if($this->countcomponents('bgstyling')>0): ?>
-		<div id="bgstyling">{{position:bgstyling}}</div>
-	<?php endif; ?>
 
 
-	<?php if($this->countcomponents('topbigbanner')>0): ?>
-		<div id="topbigbanner" class="wrapper">{{position:topbigbanner}}</div>
-	<?php endif; ?>
-	<div id="head">
-		<div id="headw" class="wrapperx">
-			<a class="logo" href="<?php echo $url_main; ?>"><div class="logofooter"><b>Brilliant Framework</b>&nbsp;&ndash; <span class="date"><?php echo $currentdatestr; ?></span></div></a>
-			<div class="afterlogo"></div>
-			<div class="header_rec">{{position:headerad}}</div>
-			<div class="clear"></div>
-		</div>
-	</div>
-	<div id="menusbar">
-	<?php if($this->countcomponents('mainmenu')>0): ?>
-		<div class="redmenu">
-			<div class="wrapper wrapperx">
-				<div class="wrapper redwrapper">
-					<div class="redmenuinner">{{position:mainmenu}}</div>
-					<div class="redmenusearch">{{position:newssearch}}</div>
-					<div class="redmenubutton">{{position:addbutton}}</div>
-				</div>
-			</div>
-		</div>
-	<?php endif; ?>
-	</div>
 
-<div class="wrapperx" id="mainwrapper">
-{{position:beforeall}}
-<div id="position-breadcrumbs">
-{{position:beforebreadcrumbs}}
-<?php BGeneralBreadcrumbs::staticdraw(); ?>
-<div class="clear"></div>
-</div>
-<?php
-if($col_left){
-	echo('<div class="leftcolumn '.$clspref.'leftcolumn">{{position:leftcolumn}}</div>');
-	}
-?>
-<div class="content <?php echo($clspref); ?>content">
-{{position:beforefcols}}
-	<div class="firstcolumns">
-		<div class="w50 fcol fcol-left">
-			<div class="wr">{{position:fcolleft}}</div>
-		</div>
-		<div class="w50 fcol fcol-right">
-			<div class="wr">{{position:fcolright}}</div>
-		</div>
-		<div class="clear"></div>
-	</div>
-
-	{{position:beforecontent}}
-	{{position:content}}
-	{{position:aftercontent}}
-
-	<div class="aftercolumns">
-		<div class="w50 acol acol-left">
-			<div class="wr">{{position:acolleft}}</div>
-		</div>
-		<div class="w50 acol acol-right">
-			<div class="wr">{{position:acolright}}</div>
-		</div>
-		<div class="clear"></div>
-	</div>
-</div>
-<?php
-if($col_right){
-	echo('<div class="rightcolumn '.$clspref.'rightcolumn">{{position:rightcolumn}}</div>');
-	}
-?>
-<a href="#top" id="gotop" class="pg pg-gotop"></a>
-<div style="clear:both"></div>
-{{position:afterall}}
-</div>
-<div class="push"></div>
-</div>
-
-<div id="footer">
-</div>
 </body></html>
 
