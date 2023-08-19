@@ -1,4 +1,9 @@
+/filecache/*.dat
 /config/config.php
 /vendor
 /php_errors.log
 composer.lock
+
+/languages/ru.php
+/languages/ua.php
+/languages/en.php

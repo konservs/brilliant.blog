@@ -21,5 +21,20 @@ services:
       - ./:/var/www/html/
    #   - ./logs/php.log:/var/log/fpm-php.www.log
 
+  mysql:
+    image: php:fpm-alpine
+    networks:
+      - blognet
+    ports: 
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: brilliantblog
+      MYSQL_USER: brilliant
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: password 
+    volumes:
+      - ./docker/mysqlpersistent:/var/lib/mysql
+      #- ./dump:/docker-entrypoint-initdb.d
+
 networks:
   blognet: {}
