@@ -1,0 +1,25 @@
+version: "3"
+services:
+
+  blog:
+    build:
+      context: .
+      dockerfile: /Dockerfile
+      target: nginx
+    ports: 
+      - "8080:80"
+    networks:
+      - blognet
+    volumes:
+      - ./:/var/www/html/
+    #  - ./logs/nginx:/var/log/nginx/
+  php:
+    image: php:fpm-alpine
+    networks:
+      - blognet
+    volumes:
+      - ./:/var/www/html/
+   #   - ./logs/php.log:/var/log/fpm-php.www.log
+
+networks:
+  blognet: {}

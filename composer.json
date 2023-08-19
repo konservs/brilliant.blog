@@ -1,8 +1,16 @@
 {
+	"config": {
+		"component-dir": "static/assets",
+		"component-baseurl": "/static/assets"
+		},
 	"autoload": {
 		"psr-4": {
-			"Brilliant\\": "framework/libraries/",
-			"Application\\": "application/"
+			"Application\\": "application/libraries/"
 			}
+		},
+	"require": {
+		"konservs/brilliant.framework": "dev-master",
+		"robmorgan/phinx": "^0.8.0",
+		"components/font-awesome": "*"
 		}
 	}
